@@ -1,0 +1,241 @@
+1.
+
+clc,clear all,close all; 
+[K,map]= imread('lena.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,1); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('lena直方图');
+
+[K,map]= imread('lena1.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,2); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('lena1直方图');
+
+[K,map]= imread('lena2.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,3); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 150000]); 
+title('lena2直方图');
+
+[K,map]= imread('lean4.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,4); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 10000]); 
+title('lena4直方图');
+
+clc,clear all,close all; 
+[K,map]= imread('elain.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,1); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('elain直方图');
+
+[K,map]= imread('elain1.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,2); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('elain1直方图');
+
+[K,map]= imread('elain2.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,3); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 150000]); 
+title('elain2直方图');
+
+[K,map]= imread('elain3.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,4); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 10000]); 
+title('elain3直方图');
+
+clc,clear all,close all; 
+[K,map]= imread('citywall.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,1); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('citywall直方图');
+
+[K,map]= imread('citywall1.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,2); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('citywall1直方图');
+
+[K,map]= imread('citywall2.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,3:4); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 150000]); 
+title('citywall2直方图');
+
+clc,clear all,close all; 
+[K,map]= imread('woman.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,1); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('woman直方图');
+
+[K,map]= imread('woman1.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,2); 
+K1=ind2gray(K,map); 
+imhist(K1);
+
+title('woman1直方图');
+
+[K,map]= imread('woman2.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,3:4); 
+K1=ind2gray(K,map); 
+imhist(K1); 
+axis([0 255 0 150000]); 
+title('woman2直方图');
+
+2.
+
+clc,clear all,close all; 
+[H,map]= imread('citywall.bmp'); 
+map(end:255,:)=0; 
+subplot(2,2,1); 
+H=ind2gray(H,map); 
+subplot(2,2,1); 
+imshow(H,[0,255]); 
+title('原图');
+
+[m,n]=size(H); 
+p=zeros(1,256); 
+for i=0:255 
+p(i+1)=length(find(H==i))/(m*n); 
+end
+
+subplot(2,2,2); 
+bar(0:255,p,'b'); 
+title('原图直方图');
+
+s=zeros(1,256); 
+for i=1:256 
+for j=1:i 
+s(i)=p(j)+s(i); 
+end 
+end
+
+a=round(s*255); 
+b=H; 
+for i=0:255 
+b(find(H==i))=a(i+1); 
+end 
+subplot(2,2,3); 
+imshow(b) 
+title('均衡化后图像');
+
+for i=0:255 
+GPeq(i+1)=sum(p(find(a==i))); 
+end 
+subplot(2,2,4); 
+bar(0:255,GPeq,'b'); title('均衡化后的直方图');
+
+3.
+
+close all;clear all;clc;
+
+[image1,map] = imread('citywall1.bmp'); 
+map(end:255,:)=0; 
+image=ind2gray(image1,map);
+
+[b1,map] = imread('citywall.bmp'); 
+map(end:255,:)=0; 
+b=ind2gray(b1,map);
+
+hist3 = imhist(b); 
+match11 = histeq(image, hist3);
+
+figure; 
+subplot(2, 3, 1), imshow(image), title('原图像'); 
+subplot(2, 3, 2), imshow(b), title('模板图像'); 
+subplot(2, 3, 3), imshow(match1), title('匹配后得到的图像'); 
+subplot(2, 3, 4), imhist(image), title('原图像的直方图'); 
+subplot(2, 3, 5), imhist(b), title('模板图像的直方图'); 
+subplot(2, 3, 6), imhist(match1), title('匹配后的直方图');
+
+4、
+
+clear; 
+close all; 
+img=imread('C:\Users\Administrator\Desktop\第三次作业\lena.bmp'); 
+figure,imshow(img); 
+title('原始图像'); 
+%构建模板 
+n=7; 
+model(1:n,1:n)=1;%a为n*n大小的模板，像素值为1 
+imgTend=wextend('2D','sym',img,n); 
+tendTrans=double(imgTend);%变成double型便于后期的点乘计算 
+[row,col]=size(imgTend);%获取扩展后的图像的大小 
+tendTransTmp=tendTrans; 
+for i=n+1:row-n 
+for j=n+1:col-n 
+modelResult=tendTrans(i:i+(n-1),j:j+(n-1)). 
+modelEpual=histeq(uint8(modelResult)); 
+equalTmp=double(modelEpual); 
+tendTransTmp(i,j)=equalTmp(4,4);%将均衡后的中心点的像素值赋给原图对应点的元素 
+end 
+end 
+%未被赋值的元素取原值 
+result=tendTransTmp(n+1:row-n,n+1:col-n);%均衡化后取原图像大小 
+result=uint8(result); 
+%d=uint8(x2); 
+figure,imshow(result); 
+title('均衡后的图像');
+
+5、
+
+close all 
+clc 
+clear 
+[A1,map1]=imread('C:\Users\Administrator\Desktop\第三次作业\elain.bmp'); 
+G1=ind2gray(A1,map1); 
+glh(G1); 
+title('直方图'); 
+figure; 
+subplot(1,2,1); 
+imshow(G1); 
+title('原图'); 
+t1=125; 
+[m n]=size(G1); 
+I1=zeros(m,n); 
+for i=1:m 
+for j=1:n 
+if G1(i,j)>t1 
+I1(i,j)=1; 
+else 
+I1(i,j)=0; 
+end 
+end 
+end 
+subplot(1,2,2); 
+imshow(I1); 
+title('分割后');
